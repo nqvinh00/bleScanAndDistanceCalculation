@@ -17,18 +17,18 @@ class BlePoint(object):
         text = font.render(self.blePoint, True, (255, 255, 255))
         windows.blit(text, (50, 40))
 
+def drawWindows():
+    pygame.draw.rect(windows, (0, 255, 0), (0, 0, 900, 600), 3)
+    for ble in blePoints:
+        ble.draw(windows)
+    pygame.display.update()
+    
 blePoints = []
 i = 0
 for addr, name in nearby_devices:
     ble = BlePoint(addr, name, position[i])
     blePoints.append(ble)
     i += 1
-
-def drawWindows():
-    pygame.draw.rect(windows, (0, 255, 0), (0, 0, 900, 600), 3)
-    for ble in blePoints:
-        ble.draw(windows)
-    pygame.display.update()
 run = True
 while run:
     for event in pygame.event.get():
