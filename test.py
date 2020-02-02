@@ -11,18 +11,30 @@ class BlePoint(object):
         self.blePoint = addr + name
         self.position = position
         self.radius = 10
+        # self.txPower = 
+        # self.rssi = 
+
+    # def distanceCalculation(self):
+
+    # def convert(self, distance):
+    #     return round(distance * 37.7952755906)
+    # # real pixel distance = the return number / 0.01, fixed for fit the win screen
 
     def draw(self, windows):
-        pygame.draw.circle(windows, (255, 0, 0), self.position, 8)
+        # distance = self.distanceCalculation()
+        # pixelDistance = self.convert(distance)
+        pygame.draw.circle(windows, (255, 0, 0), self.position, 6)
         text = font.render(self.blePoint, True, (255, 255, 255))
-        windows.blit(text, (50, 40))
+        windows.blit(text, (self.position[0], self.position[1] + 15))
+        # pygame.draw.circle(windows, (255, 255, 255), self.position, pixelDistance, 1)
+
 
 def drawWindows():
     pygame.draw.rect(windows, (0, 255, 0), (0, 0, 900, 600), 3)
     for ble in blePoints:
         ble.draw(windows)
     pygame.display.update()
-    
+
 blePoints = []
 i = 0
 for addr, name in nearby_devices:
